@@ -100,6 +100,82 @@ class DemoSeeder extends Seeder
             ]);
         }
 
+        // Marchés municipaux (Moundou)
+        $central = \App\Models\Market::firstOrCreate(['code' => 'MC-MOUNDOU'], [
+            'name' => 'Marché Central de Moundou',
+            'location' => 'Centre Commercial / Dombao',
+            'manager_name' => 'Brahim Mahamat (Régisseur)',
+            'manager_phone' => '+235 66 55 44 33',
+            'sectors' => ['Allée A (Tissus)', 'Allée B (Alimentation)', 'Bloc Boutiques Nord', 'Hangar Céréales'],
+            'latitude' => 8.5667,
+            'longitude' => 16.0833,
+            'is_active' => true,
+        ]);
+
+        $gueldjem = \App\Models\Market::firstOrCreate(['code' => 'MG-GUELDJEM'], [
+            'name' => 'Marché de Gueldjem',
+            'location' => 'Quartier Gueldjem',
+            'manager_name' => 'Saleh Ousmane',
+            'manager_phone' => '+235 99 22 11 00',
+            'sectors' => ['Secteur Maraîcher', 'Allée Poissonnerie'],
+            'is_active' => true,
+        ]);
+
+        if ($central && $taxpayer1) {
+            $stall1 = \App\Models\MarketStall::firstOrCreate(['code' => 'MC-A-01'], [
+                'market_id' => $central->id,
+                'name' => 'Étal Allée A - N°01',
+                'sector' => 'Allée A (Tissus)',
+                'type' => 'etal',
+                'dimensions' => '2m x 2m',
+                'base_fee' => 500,
+                'periodicity' => 'journalier',
+                'status' => 'occupied',
+                'current_occupant_id' => $taxpayer1->id,
+            ]);
+
+            \App\Models\MarketOccupancy::firstOrCreate(['stall_id' => $stall1->id, 'taxpayer_id' => $taxpayer1->id], [
+                'activity' => 'Vente de tissus et pagnes',
+                'start_date' => now()->startOfYear(),
+                'agreed_fee' => 500,
+                'status' => 'active',
+            ]);
+
+            \App\Models\MarketStall::firstOrCreate(['code' => 'MC-A-02'], [
+                'market_id' => $central->id,
+                'name' => 'Étal Allée A - N°02',
+                'sector' => 'Allée A (Tissus)',
+                'type' => 'etal',
+                'dimensions' => '2m x 2m',
+                'base_fee' => 500,
+                'periodicity' => 'journalier',
+                'status' => 'available',
+            ]);
+
+            \App\Models\MarketStall::firstOrCreate(['code' => 'MC-BTQ-01'], [
+                'market_id' => $central->id,
+                'name' => 'Boutique Bloc Nord - N°01',
+                'sector' => 'Bloc Boutiques Nord',
+                'type' => 'boutique',
+                'dimensions' => '4m x 4m (16 m²)',
+                'base_fee' => 25000,
+                'periodicity' => 'mensuel',
+                'status' => 'occupied',
+                'current_occupant_id' => $taxpayer1->id,
+            ]);
+
+            \App\Models\MarketStall::firstOrCreate(['code' => 'MC-BTQ-02'], [
+                'market_id' => $central->id,
+                'name' => 'Boutique Bloc Nord - N°02',
+                'sector' => 'Bloc Boutiques Nord',
+                'type' => 'boutique',
+                'dimensions' => '4m x 4m (16 m²)',
+                'base_fee' => 25000,
+                'periodicity' => 'mensuel',
+                'status' => 'available',
+            ]);
+        }
+
         $this->command?->info('Démo prête. Comptes @demo.local, mot de passe : demo-Passw0rd!');
     }
 }

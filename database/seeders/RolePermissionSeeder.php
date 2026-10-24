@@ -44,7 +44,7 @@ class RolePermissionSeeder extends Seeder
             'users.manage', 'roles.view', 'services.manage', 'audit.view',
         ]],
         'admin_municipal' => ['Administrateur municipal', 'Paramétrage métier et habilitations.', [
-            'users.manage', 'roles.view', 'services.manage', 'revenue.configure', 'revenue.closing.create', 'revenue.closing.audit', 'revenue.recovery', 'hr.view', 'reports.view',
+            'users.manage', 'roles.view', 'services.manage', 'revenue.view', 'revenue.taxpayers', 'revenue.configure', 'revenue.closing.create', 'revenue.closing.audit', 'revenue.recovery', 'hr.view', 'reports.view',
         ]],
         'direction' => ['Direction (maire, secrétaire général)', 'Pilotage et décisions.', [
             'revenue.view', 'revenue.closing.audit', 'revenue.recovery', 'civil.birth.view', 'hr.view', 'hr.leave.decide', 'reports.view', 'audit.view',

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Civil;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HR;
+use App\Http\Controllers\Market;
 use App\Http\Controllers\Offline\SyncController;
 use App\Http\Controllers\PublicVerificationController;
 use App\Http\Controllers\Revenue;
@@ -81,6 +82,25 @@ Route::middleware('auth')->group(function () {
                 Route::post('categories/{category}/tarifs', [Revenue\CategoryController::class, 'storeTariff'])->name('tariffs.store');
                 Route::post('tarifs/{tariff}/basculer', [Revenue\CategoryController::class, 'toggleTariff'])->name('tariffs.toggle');
             });
+        });
+
+        /* Marchés municipaux & Domaine public (Annexe B) */
+        Route::prefix('marches')->name('markets.')->group(function () {
+            Route::get('/', [Market\MarketController::class, 'index'])->middleware('can:revenue.view')->name('index');
+            Route::get('nouveau', [Market\MarketController::class, 'create'])->middleware('can:revenue.configure')->name('create');
+            Route::post('/', [Market\MarketController::class, 'store'])->middleware('can:revenue.configure')->name('store');
+            Route::get('{market}', [Market\MarketController::class, 'show'])->middleware('can:revenue.view')->name('show');
+            Route::get('{market}/modifier', [Market\MarketController::class, 'edit'])->middleware('can:revenue.configure')->name('edit');
+            Route::put('{market}', [Market\MarketController::class, 'update'])->middleware('can:revenue.configure')->name('update');
+
+            // Emplacements, étals et boutiques
+            Route::get('{market}/emplacements/nouveau', [Market\StallController::class, 'create'])->middleware('can:revenue.configure')->name('stalls.create');
+            Route::post('{market}/emplacements', [Market\StallController::class, 'store'])->middleware('can:revenue.configure')->name('stalls.store');
+            Route::get('emplacements/{stall}', [Market\StallController::class, 'show'])->middleware('can:revenue.view')->name('stalls.show');
+            Route::get('emplacements/{stall}/modifier', [Market\StallController::class, 'edit'])->middleware('can:revenue.configure')->name('stalls.edit');
+            Route::put('emplacements/{stall}', [Market\StallController::class, 'update'])->middleware('can:revenue.configure')->name('stalls.update');
+            Route::post('emplacements/{stall}/attribuer', [Market\StallController::class, 'assignOccupant'])->middleware('can:revenue.configure')->name('stalls.assign');
+            Route::post('emplacements/{stall}/liberer', [Market\StallController::class, 'releaseStall'])->middleware('can:revenue.configure')->name('stalls.release');
         });
 
         /* État civil */

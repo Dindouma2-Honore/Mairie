@@ -28,6 +28,14 @@ return [
         ],
     ],
     [
+        'key' => 'markets',
+        'label' => 'Marchés municipaux',
+        'icon' => 'landmark',
+        'items' => [
+            ['label' => 'Tous les marchés', 'route' => 'markets.index', 'can' => 'revenue.view', 'match' => ['markets.index', 'markets.create', 'markets.edit']],
+        ],
+    ],
+    [
         'key' => 'civil',
         'label' => 'État civil',
         'icon' => 'file-text',

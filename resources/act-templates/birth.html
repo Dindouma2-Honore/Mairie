@@ -1,0 +1,99 @@
+<style>
+.ac-page{width:194mm;height:281mm;position:relative;font-family:"Times New Roman",Times,"Liberation Serif",serif;color:#000;box-sizing:border-box;overflow:hidden}
+.ac-page *{box-sizing:border-box}
+.ac-ar{font-family:"Traditional Arabic","Simplified Arabic","Noto Naskh Arabic","Amiri","Times New Roman","DejaVu Sans",serif;direction:rtl;unicode-bidi:embed}
+.ac-volet{position:relative;height:140.5mm;padding:0 1mm;display:flex;flex-direction:column}
+.ac-flag{position:absolute;left:-8mm;width:24mm;height:24mm;clip-path:polygon(0 0,100% 0,0 100%);background:linear-gradient(90deg,#00205b 0 33.4%,#fecb00 33.4% 66.7%,#c8102e 66.7%);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ac-volet.is-first .ac-flag{top:-8mm}.ac-volet.is-second .ac-flag{top:0}
+.ac-head{display:grid;grid-template-columns:1fr 1fr 22mm;column-gap:3mm;height:25mm;padding-left:15mm;align-items:start}
+.ac-head .fr{font-size:9pt;line-height:1.25}
+.ac-head .fr b{font-size:10.5pt}
+.ac-head .fr i{display:block;margin-top:1.2mm;font-size:7.5pt;line-height:1.2}
+.ac-head .ar{font-size:10pt;line-height:1.3;text-align:right}
+.ac-head .ar small{display:block;margin-top:1mm;font-size:8.5pt;line-height:1.25}
+.ac-emblem{width:21mm;height:21mm;justify-self:end;background:url(/images/armoiries.png) center/contain no-repeat;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ac-title{font-size:11pt;font-weight:bold}
+.ac-title .ac-ar{font-size:12pt}
+.ac-row{display:grid;grid-template-columns:49mm 1fr 33mm;column-gap:2mm;align-items:end;min-height:4.7mm;font-size:9.4pt;line-height:1.05}
+.ac-row.full{grid-template-columns:1fr}
+.ac-row .v{border-bottom:.25mm solid #000;padding:0 1.5mm;min-height:4.2mm;font-weight:bold;font-size:9.6pt;font-family:Arial,"Liberation Sans","DejaVu Sans",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.ac-row.nov .v{border-bottom:0}
+.ac-row .ar{text-align:right;font-size:10pt}
+.ac-gap{height:2.2mm}
+.ac-sign{display:grid;grid-template-columns:49mm 1fr 33mm;column-gap:2mm;margin-top:1.2mm;font-size:9.4pt}
+.ac-sign .nm{text-align:center;font-weight:bold;font-size:9pt;font-family:Arial,"Liberation Sans","DejaVu Sans",sans-serif;padding-top:3mm}
+.ac-sign .ar{text-align:right;font-size:10pt}
+.ac-verif{margin-top:auto;padding-top:1mm;font:6.3pt Arial,"Liberation Sans","DejaVu Sans",sans-serif;color:#333;text-align:center}
+.ac-wm{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:5}
+.ac-wm span{transform:rotate(-30deg);font:700 46pt Arial,sans-serif;letter-spacing:3px;color:rgba(179,38,30,.12);white-space:nowrap;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ac-wm.wm-off{display:none}
+</style>
+<div class="ac-page">
+<div class="ac-wm {{filigrane_classe}}"><span>MODÈLE À VALIDER</span></div>
+<section class="ac-volet is-first">
+<div class="ac-flag" aria-hidden="true"></div>
+<div class="ac-head">
+ <div class="fr"><b>Volet N°2</b><br>République du Tchad<br>Unité – Travail – Progrès<i>(à envoyer au centre d’Etat civil principal dont dépend le centre secondaire)</i></div>
+ <div class="ar ac-ar" lang="ar" dir="rtl">ورقة ثانية<br>جمهورية تشاد<br>وحدة – عمل – تقدم<small>(يُرسل إلى مركز الأحوال المدنية الرئيسي الذي يتبع له المركز الثانوي)</small></div>
+ <div class="ac-emblem" aria-hidden="true"></div>
+</div>
+<div class="ac-row ac-title"><div class="fr">Acte de naissance N°</div><div class="v">{{numero_acte}}</div><div class="ar ac-ar" lang="ar" dir="rtl">شهادة ميلاد رقم</div></div>
+<div class="ac-row"><div class="fr">Centre d’Etat civil (1)</div><div class="v">{{centre}}</div><div class="ar ac-ar" lang="ar" dir="rtl">مركز الأحوال المدنية</div></div>
+<div class="ac-row"><div class="fr">de</div><div class="v">{{commune}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ل</div></div>
+<div class="ac-row"><div class="fr">le (2)</div><div class="v">{{date_declaration}}</div><div class="ar ac-ar" lang="ar" dir="rtl">بتاريخ</div></div>
+<div class="ac-row"><div class="fr">s’est présenté (e) (3)</div><div class="v">{{declarant_nom}}</div><div class="ar ac-ar" lang="ar" dir="rtl">حضر</div></div>
+<div class="ac-row full"><div class="v">{{declarant_qualite}}</div></div>
+<div class="ac-row full"><div class="v"></div></div>
+<div class="ac-row nov"><div class="fr">qui a déclaré la naissance d’un</div><div class="v"></div><div class="ar ac-ar" lang="ar" dir="rtl">أعلن عن ميلاد</div></div>
+<div class="ac-row"><div class="fr">enfant de sexe</div><div class="v">{{sexe}}</div><div class="ar ac-ar" lang="ar" dir="rtl">طفل من جنس</div></div>
+<div class="ac-row"><div class="fr">survenue à</div><div class="v">{{lieu_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ولد في</div></div>
+<div class="ac-row"><div class="fr">Rue (4)</div><div class="v">{{rue_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">شارع</div></div>
+<div class="ac-row"><div class="fr">Le (5)</div><div class="v">{{date_heure_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">بتاريخ</div></div>
+<div class="ac-row"><div class="fr">Nommé (e)</div><div class="v">{{nom_complet_enfant}}</div><div class="ar ac-ar" lang="ar" dir="rtl">سمي</div></div>
+<div class="ac-gap"></div>
+<div class="ac-row"><div class="fr">Fils/Fille de (6)</div><div class="v">{{pere_nom}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ابن / ابنة</div></div>
+<div class="ac-row"><div class="fr">Né (e)</div><div class="v">{{pere_lieu_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ولد (ت) في</div></div>
+<div class="ac-row"><div class="fr">Le</div><div class="v">{{pere_date_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">بتاريخ</div></div>
+<div class="ac-row"><div class="fr">Profession</div><div class="v">{{pere_profession}}</div><div class="ar ac-ar" lang="ar" dir="rtl">المهنة</div></div>
+<div class="ac-row"><div class="fr">et de (7)</div><div class="v">{{mere_nom}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ومن</div></div>
+<div class="ac-row"><div class="fr">Née à</div><div class="v">{{mere_lieu_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ولدت في</div></div>
+<div class="ac-row"><div class="fr">Le</div><div class="v">{{mere_date_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">بتاريخ</div></div>
+<div class="ac-row"><div class="fr">Profession</div><div class="v">{{mere_profession}}</div><div class="ar ac-ar" lang="ar" dir="rtl">المهنة</div></div>
+<div class="ac-row"><div class="fr">Sa légitime épouse</div><div class="v"></div><div class="ar ac-ar" lang="ar" dir="rtl">زوجته الشرعية</div></div>
+<div class="ac-sign"><div class="fr">L’Officier d’Etat Civil</div><div class="nm">{{officier}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ضابط الأحوال المدنية</div></div>
+<div class="ac-verif">{{type_copie}} n° {{numero_copie}} — édité le {{date_edition}} — Vérification : {{code_verification}} — {{url_verification}}</div>
+</section>
+<section class="ac-volet is-second">
+<div class="ac-flag" aria-hidden="true"></div>
+<div class="ac-head">
+ <div class="fr"><b>Volet N°1</b><br>République du Tchad<br>Unité – Travail – Progrès<i>(à remettre à celui des parents investi de la puissance parentale)</i></div>
+ <div class="ar ac-ar" lang="ar" dir="rtl">ورقة أولى<br>جمهورية تشاد<br>وحدة – عمل – تقدم<small>(تُسلَّم إلى من له الولاية الأبوية)</small></div>
+ <div class="ac-emblem" aria-hidden="true"></div>
+</div>
+<div class="ac-row ac-title"><div class="fr">Acte de naissance N°</div><div class="v">{{numero_acte}}</div><div class="ar ac-ar" lang="ar" dir="rtl">شهادة ميلاد رقم</div></div>
+<div class="ac-row"><div class="fr">Centre d’Etat civil (1)</div><div class="v">{{centre}}</div><div class="ar ac-ar" lang="ar" dir="rtl">مركز الأحوال المدنية</div></div>
+<div class="ac-row"><div class="fr">de</div><div class="v">{{commune}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ل</div></div>
+<div class="ac-row"><div class="fr">le (2)</div><div class="v">{{date_declaration}}</div><div class="ar ac-ar" lang="ar" dir="rtl">بتاريخ</div></div>
+<div class="ac-row"><div class="fr">s’est présenté (e) (3)</div><div class="v">{{declarant_nom}}</div><div class="ar ac-ar" lang="ar" dir="rtl">حضر</div></div>
+<div class="ac-row full"><div class="v">{{declarant_qualite}}</div></div>
+<div class="ac-row full"><div class="v"></div></div>
+<div class="ac-row nov"><div class="fr">qui a déclaré la naissance d’un</div><div class="v"></div><div class="ar ac-ar" lang="ar" dir="rtl">أعلن عن ميلاد</div></div>
+<div class="ac-row"><div class="fr">enfant de sexe</div><div class="v">{{sexe}}</div><div class="ar ac-ar" lang="ar" dir="rtl">طفل من جنس</div></div>
+<div class="ac-row"><div class="fr">survenue à</div><div class="v">{{lieu_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ولد في</div></div>
+<div class="ac-row"><div class="fr">Rue (4)</div><div class="v">{{rue_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">شارع</div></div>
+<div class="ac-row"><div class="fr">Le (5)</div><div class="v">{{date_heure_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">بتاريخ</div></div>
+<div class="ac-row"><div class="fr">Nommé (e)</div><div class="v">{{nom_complet_enfant}}</div><div class="ar ac-ar" lang="ar" dir="rtl">سمي</div></div>
+<div class="ac-gap"></div>
+<div class="ac-row"><div class="fr">Fils/Fille de (6)</div><div class="v">{{pere_nom}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ابن / ابنة</div></div>
+<div class="ac-row"><div class="fr">Né (e)</div><div class="v">{{pere_lieu_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ولد (ت) في</div></div>
+<div class="ac-row"><div class="fr">Le</div><div class="v">{{pere_date_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">بتاريخ</div></div>
+<div class="ac-row"><div class="fr">Profession</div><div class="v">{{pere_profession}}</div><div class="ar ac-ar" lang="ar" dir="rtl">المهنة</div></div>
+<div class="ac-row"><div class="fr">et de (7)</div><div class="v">{{mere_nom}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ومن</div></div>
+<div class="ac-row"><div class="fr">Née à</div><div class="v">{{mere_lieu_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ولدت في</div></div>
+<div class="ac-row"><div class="fr">Le</div><div class="v">{{mere_date_naissance}}</div><div class="ar ac-ar" lang="ar" dir="rtl">بتاريخ</div></div>
+<div class="ac-row"><div class="fr">Profession</div><div class="v">{{mere_profession}}</div><div class="ar ac-ar" lang="ar" dir="rtl">المهنة</div></div>
+<div class="ac-row"><div class="fr">Sa légitime épouse</div><div class="v"></div><div class="ar ac-ar" lang="ar" dir="rtl">زوجته الشرعية</div></div>
+<div class="ac-sign"><div class="fr">L’Officier d’Etat Civil</div><div class="nm">{{officier}}</div><div class="ar ac-ar" lang="ar" dir="rtl">ضابط الأحوال المدنية</div></div>
+<div class="ac-verif">{{type_copie}} n° {{numero_copie}} — édité le {{date_edition}} — Vérification : {{code_verification}} — {{url_verification}}</div>
+</section>
+</div>

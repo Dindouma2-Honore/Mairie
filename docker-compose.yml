@@ -1,0 +1,24 @@
+# MySQL de développement : docker compose up -d
+# Les identifiants correspondent à .env.example (à changer hors développement).
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: mairie360
+      MYSQL_USER: mairie360
+      MYSQL_PASSWORD: change-me
+      MYSQL_ROOT_PASSWORD: change-me-root
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mairie360-mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pchange-me-root"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mairie360-mysql:

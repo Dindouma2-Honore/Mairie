@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
         Service::firstOrCreate(['code' => 'SG'], ['name' => 'Secrétariat général']);
         CivilCentre::firstOrCreate(['code' => 'CENTRAL'], ['name' => 'Centre principal d’état civil']);
 
-        $email = env('ADMIN_EMAIL', 'admin@mairie360.local');
+        $email = env('ADMIN_EMAIL', 'admin@gmail.com');
 
         if (! User::where('email', $email)->exists()) {
-            $password = env('password') ?: Str::password(8, symbols: false);
+            $password = env('1234') ?: Str::password(4, symbols: false);
 
             $admin = User::create([
                 'name' => 'Administrateur',

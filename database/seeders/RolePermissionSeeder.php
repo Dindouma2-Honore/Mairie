@@ -19,6 +19,9 @@ class RolePermissionSeeder extends Seeder
         'revenue.cancel' => ['revenue', 'Annuler un reçu'],
         'revenue.taxpayers' => ['revenue', 'Gérer les contribuables'],
         'revenue.configure' => ['revenue', 'Configurer catégories et tarifs'],
+        'revenue.closing.create' => ['revenue', 'Effectuer une clôture de caisse'],
+        'revenue.closing.audit' => ['revenue', 'Contrôler et viser les clôtures de caisse'],
+        'revenue.recovery' => ['revenue', 'Gérer le recouvrement et les impayés'],
         'civil.birth.view' => ['civil', 'Consulter les actes de naissance'],
         'civil.birth.create' => ['civil', 'Saisir une déclaration de naissance'],
         'civil.birth.validate' => ['civil', 'Valider un acte (officier d’état civil)'],
@@ -41,19 +44,19 @@ class RolePermissionSeeder extends Seeder
             'users.manage', 'roles.view', 'services.manage', 'audit.view',
         ]],
         'admin_municipal' => ['Administrateur municipal', 'Paramétrage métier et habilitations.', [
-            'users.manage', 'roles.view', 'services.manage', 'revenue.configure', 'hr.view', 'reports.view',
+            'users.manage', 'roles.view', 'services.manage', 'revenue.configure', 'revenue.closing.create', 'revenue.closing.audit', 'revenue.recovery', 'hr.view', 'reports.view',
         ]],
         'direction' => ['Direction (maire, secrétaire général)', 'Pilotage et décisions.', [
-            'revenue.view', 'civil.birth.view', 'hr.view', 'hr.leave.decide', 'reports.view', 'audit.view',
+            'revenue.view', 'revenue.closing.audit', 'revenue.recovery', 'civil.birth.view', 'hr.view', 'hr.leave.decide', 'reports.view', 'audit.view',
         ]],
         'rh' => ['Responsable RH', 'Dossiers agents et congés.', [
             'hr.view', 'hr.manage', 'hr.leave.request', 'hr.leave.decide',
         ]],
         'regisseur' => ['Régisseur / collecteur', 'Encaissement et reçus.', [
-            'revenue.view', 'revenue.create', 'revenue.taxpayers',
+            'revenue.view', 'revenue.create', 'revenue.taxpayers', 'revenue.closing.create',
         ]],
         'resp_financier' => ['Responsable financier', 'Contrôle des recettes, annulations, tarifs.', [
-            'revenue.view', 'revenue.create', 'revenue.cancel', 'revenue.taxpayers', 'revenue.configure', 'reports.view',
+            'revenue.view', 'revenue.create', 'revenue.cancel', 'revenue.taxpayers', 'revenue.configure', 'revenue.closing.create', 'revenue.closing.audit', 'revenue.recovery', 'reports.view',
         ]],
         'officier_etat_civil' => ['Officier d’état civil', 'Validation des actes.', [
             'civil.birth.view', 'civil.birth.create', 'civil.birth.validate', 'civil.birth.print', 'civil.templates',

@@ -9,7 +9,21 @@
         <thead><tr><th>Nom</th><th>Référence</th><th>Quartier / repère</th><th>Activité</th><th>Téléphone</th><th class="r">Reçus</th><th></th></tr></thead>
         <tbody>
         @forelse($taxpayers as $t)
-            <tr><td class="name">{{ $t->name }} @unless($t->is_active)<span class="badge">inactif</span>@endunless</td><td>{{ $t->reference ?? '—' }}</td><td>{{ $t->quarter ?? '—' }}</td><td>{{ $t->activity ?? '—' }}</td><td>{{ $t->phone ?? '—' }}</td><td class="r num">{{ $t->receipts_count }}</td><td class="r"><a href="{{ route('revenue.taxpayers.edit', $t) }}">Modifier</a></td></tr>
+            <tr>
+                <td class="name">
+                    <a href="{{ route('revenue.taxpayers.show', $t) }}"><b>{{ $t->name }}</b></a>
+                    @unless($t->is_active)<span class="badge bad">inactif</span>@endunless
+                </td>
+                <td>{{ $t->reference ?? '—' }}</td>
+                <td>{{ $t->quarter ?? '—' }}</td>
+                <td>{{ $t->activity ?? '—' }}</td>
+                <td>{{ $t->phone ?? '—' }}</td>
+                <td class="r num">{{ $t->receipts_count }}</td>
+                <td class="r">
+                    <a class="btn btn-quiet btn-sm" href="{{ route('revenue.taxpayers.show', $t) }}">Fiche</a>
+                    <a class="btn btn-quiet btn-sm" href="{{ route('revenue.taxpayers.edit', $t) }}">Modifier</a>
+                </td>
+            </tr>
         @empty
             <tr><td colspan="7"><div class="empty"><b>Aucun contribuable</b></div></td></tr>
         @endforelse

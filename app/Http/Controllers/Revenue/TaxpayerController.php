@@ -35,6 +35,20 @@ class TaxpayerController extends Controller
         return redirect()->route('revenue.taxpayers.index')->with('success', 'Contribuable « ' . $taxpayer->name . ' » enregistré.');
     }
 
+    public function show(Taxpayer $taxpayer)
+    {
+        $taxpayer->load([
+            'receipts' => fn ($q) => $q->with('category')->latest('collected_at'),
+            'debts' => fn ($q) => $q->with('category')->latest('due_date'),
+        ]);
+
+        $totalPaid = $taxpayer->totalPaid();
+        $totalDue = $taxpayer->totalDue();
+        $totalBalance = $taxpayer->totalBalance();
+
+        return view('revenue.taxpayers.show', compact('taxpayer', 'totalPaid', 'totalDue', 'totalBalance'));
+    }
+
     public function edit(Taxpayer $taxpayer)
     {
         return view('revenue.taxpayers.form', compact('taxpayer'));

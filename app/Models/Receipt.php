@@ -13,7 +13,7 @@ class Receipt extends Model
     protected $fillable = [
         'number', 'number_year', 'number_seq', 'client_uuid', 'category_id', 'tariff_id',
         'taxpayer_id', 'payer_name', 'description', 'quantity', 'unit_amount', 'amount',
-        'payment_method', 'transaction_ref', 'status', 'collected_by', 'collected_at',
+        'payment_method', 'transaction_ref', 'status', 'cash_closing_id', 'collected_by', 'collected_at',
         'created_offline', 'cancelled_by', 'cancelled_at', 'cancel_reason',
     ];
 
@@ -36,6 +36,16 @@ class Receipt extends Model
     public function isCancelled(): bool
     {
         return $this->status === 'cancelled';
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->cash_closing_id !== null;
+    }
+
+    public function cashClosing(): BelongsTo
+    {
+        return $this->belongsTo(CashClosing::class, 'cash_closing_id');
     }
 
     public function category(): BelongsTo

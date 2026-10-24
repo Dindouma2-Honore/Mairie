@@ -69,6 +69,26 @@
             @forelse($pending_leaves as $l)<li><span>{{ $l->agent->fullName() }}</span><span class="muted">{{ $l->start_date->format('d/m') }} → {{ $l->end_date->format('d/m') }}</span></li>@empty<li class="muted">Aucune demande en attente.</li>@endforelse
         </ul></div>
     @endif
+    @if(isset($pending_closings) && $pending_closings->isNotEmpty())
+    <div class="panel" style="border-left: 4px solid #b45309;"><div class="panel-head"><h2>Clôtures de caisse à viser ({{ $pending_closings->count() }})</h2><a href="{{ route('revenue.closings.index', ['status' => 'pending']) }}">Gérer</a></div>
+        <ul class="feed">
+            @foreach($pending_closings as $pc)
+                <li>
+                    <span><a href="{{ route('revenue.closings.show', $pc) }}"><b>{{ $pc->reference }}</b></a> · {{ $pc->collector->name }}</span>
+                    <b class="num">{{ $fcfa($pc->total_amount) }}</b>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(isset($recovery_stats))
+    <div class="panel"><div class="panel-head"><h2>Recouvrement & Impayés</h2><a href="{{ route('revenue.recovery.index') }}">Détails</a></div>
+        <div class="figures">
+            <div class="figure"><div class="k">Impayés à recouvrer</div><div class="v" style="color:{{ $recovery_stats['total_balance'] > 0 ? '#dc2626' : '#047857' }}">{{ $fcfa($recovery_stats['total_balance']) }}</div></div>
+            <div class="figure"><div class="k">Avis en retard</div><div class="v" style="color:{{ $recovery_stats['overdue_count'] > 0 ? '#dc2626' : '#047857' }}">{{ $recovery_stats['overdue_count'] }}</div></div>
+        </div>
+    </div>
+    @endif
     @if(isset($activity))
     <div class="panel"><div class="panel-head"><h2>Activité récente</h2><a href="{{ route('admin.audit.index') }}">Journal</a></div>
         <ul class="feed">

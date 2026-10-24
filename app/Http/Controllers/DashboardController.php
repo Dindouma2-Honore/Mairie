@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Agent;
 use App\Models\AuditLog;
 use App\Models\BirthAct;
+use App\Models\CashClosing;
 use App\Models\LeaveRequest;
 use App\Models\Receipt;
+use App\Models\TaxpayerDebt;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -44,6 +46,19 @@ class DashboardController extends Controller
                 ->join('revenue_categories', 'revenue_categories.id', '=', 'receipts.category_id')
                 ->selectRaw('revenue_categories.name as name, SUM(receipts.amount) as total')
                 ->groupBy('revenue_categories.name')->orderByDesc('total')->limit(5)->get();
+        }
+
+        if ($user->hasPermission('revenue.closing.audit')) {
+            $data['pending_closings'] = CashClosing::with('collector')
+                ->where('status', CashClosing::STATUS_PENDING)
+                ->latest('closing_date')->limit(5)->get();
+        }
+
+        if ($user->hasPermission('revenue.recovery')) {
+            $data['recovery_stats'] = [
+                'overdue_count' => TaxpayerDebt::where('balance', '>', 0)->whereDate('due_date', '<', today())->count(),
+                'total_balance' => (int) TaxpayerDebt::where('status', '!=', TaxpayerDebt::STATUS_CANCELLED)->sum('balance'),
+            ];
         }
 
         if ($user->hasPermission('civil.birth.view')) {

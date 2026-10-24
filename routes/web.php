@@ -53,8 +53,25 @@ Route::middleware('auth')->group(function () {
                 Route::get('contribuables', [Revenue\TaxpayerController::class, 'index'])->name('taxpayers.index');
                 Route::get('contribuables/nouveau', [Revenue\TaxpayerController::class, 'create'])->name('taxpayers.create');
                 Route::post('contribuables', [Revenue\TaxpayerController::class, 'store'])->name('taxpayers.store');
+                Route::get('contribuables/{taxpayer}', [Revenue\TaxpayerController::class, 'show'])->name('taxpayers.show');
                 Route::get('contribuables/{taxpayer}/modifier', [Revenue\TaxpayerController::class, 'edit'])->name('taxpayers.edit');
                 Route::put('contribuables/{taxpayer}', [Revenue\TaxpayerController::class, 'update'])->name('taxpayers.update');
+            });
+
+            /* Clôture de caisse & Contrôle financier (Section 5.14) */
+            Route::get('clotures', [Revenue\CashClosingController::class, 'index'])->middleware('can:revenue.view')->name('closings.index');
+            Route::get('clotures/nouvelle', [Revenue\CashClosingController::class, 'create'])->middleware('can:revenue.closing.create')->name('closings.create');
+            Route::post('clotures', [Revenue\CashClosingController::class, 'store'])->middleware('can:revenue.closing.create')->name('closings.store');
+            Route::get('clotures/{closing}', [Revenue\CashClosingController::class, 'show'])->middleware('can:revenue.view')->name('closings.show');
+            Route::get('clotures/{closing}/imprimer', [Revenue\CashClosingController::class, 'print'])->middleware('can:revenue.view')->name('closings.print');
+            Route::post('clotures/{closing}/valider', [Revenue\CashClosingController::class, 'validateClosing'])->middleware('can:revenue.closing.audit')->name('closings.validate');
+            Route::post('clotures/{closing}/rejeter', [Revenue\CashClosingController::class, 'reject'])->middleware('can:revenue.closing.audit')->name('closings.reject');
+
+            /* Recouvrement & Impayés (Section 5.13) */
+            Route::middleware('can:revenue.recovery')->group(function () {
+                Route::get('recouvrement', [Revenue\RecoveryController::class, 'index'])->name('recovery.index');
+                Route::post('recouvrement', [Revenue\RecoveryController::class, 'store'])->name('recovery.store');
+                Route::get('recouvrement/{debt}/avis', [Revenue\RecoveryController::class, 'printNotice'])->name('recovery.print_notice');
             });
 
             Route::middleware('can:revenue.configure')->group(function () {

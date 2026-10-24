@@ -93,6 +93,10 @@ class ReceiptService
             throw new DomainException('Ce reçu est déjà annulé.');
         }
 
+        if ($receipt->isClosed()) {
+            throw new DomainException('Ce reçu fait partie d’une clôture de caisse et ne peut plus être annulé.');
+        }
+
         $receipt->update([
             'status' => 'cancelled',
             'cancelled_by' => $user->id,

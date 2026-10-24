@@ -23,8 +23,8 @@ return [
             ['label' => 'Reçus émis', 'route' => 'revenue.receipts.index', 'can' => 'revenue.view', 'match' => ['revenue.receipts.index', 'revenue.receipts.show']],
             ['label' => 'Contribuables', 'route' => 'revenue.taxpayers.index', 'can' => 'revenue.taxpayers', 'match' => ['revenue.taxpayers.*']],
             ['label' => 'Catégories & tarifs', 'route' => 'revenue.categories.index', 'can' => 'revenue.configure', 'match' => ['revenue.categories.*']],
-            ['label' => 'Clôture de caisse', 'soon' => true],
-            ['label' => 'Recouvrement', 'soon' => true],
+            ['label' => 'Clôture de caisse', 'route' => 'revenue.closings.index', 'can' => 'revenue.view', 'match' => ['revenue.closings.*']],
+            ['label' => 'Recouvrement', 'route' => 'revenue.recovery.index', 'can' => 'revenue.recovery', 'match' => ['revenue.recovery.*']],
         ],
     ],
     [
